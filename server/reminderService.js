@@ -79,15 +79,18 @@ function processTaskReminders(task, now, currentTime) {
 
     // Calculate time until task
     const minutesUntilTask = Math.floor((scheduledDateTime - now) / (1000 * 60));
+    
+    // DEBUG
+    // console.log(`Task: ${task.title}, Current: ${now.toLocaleTimeString()}, Scheduled: ${scheduledTime}, Minutes until: ${minutesUntilTask}`);
 
     let reminderType = null;
 
     // Pre-start reminder (X minutes before)
-    if (minutesUntilTask === beforeMinutes) {
+    if (minutesUntilTask <= beforeMinutes && minutesUntilTask > beforeMinutes - 1) {
         reminderType = 'pre_start';
     }
-    // On-time reminder (at exact time)
-    else if (minutesUntilTask === 0) {
+    // On-time reminder (at exact time or within same minute)
+    else if (minutesUntilTask <= 0 && minutesUntilTask > -1) {
         reminderType = 'on_time';
     }
     // Overdue reminder (every Y minutes after)
