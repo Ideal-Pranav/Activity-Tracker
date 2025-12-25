@@ -9,7 +9,7 @@ if (process.env.EMAIL_USER && process.env.EMAIL_PASSWORD) {
         transporter = nodemailer.createTransport({
             host: process.env.EMAIL_HOST || 'pro.eu.turbo-smtp.com',
             port: parseInt(process.env.EMAIL_PORT) || 587,
-            secure: process.env.EMAIL_PORT == 465,
+            secure: process.env.EMAIL_SECURE === 'true' || process.env.EMAIL_PORT == 465,
             auth: {
                 user: process.env.EMAIL_USER,
                 pass: process.env.EMAIL_PASSWORD
@@ -40,7 +40,7 @@ async function sendTaskReminder(to, task, reminderType) {
 
     try {
         await transporter.sendMail({
-            from: 'Task Tracker <noreply@tasktracker.com>',
+            from: process.env.EMAIL_FROM || 'Task Tracker <noreply@tasktracker.com>',
             to: to,
             subject: subject,
             html: html
