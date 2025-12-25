@@ -1,0 +1,10 @@
+{
+  "projectId": "f897854d-c513-459e-b08c-17c4ddfa2a58",
+  "createdAt": 1735163333000,
+  "startupCommands": [
+    "cd server; bun install; node index.js",
+    "cd client; bun install; bun run dev"
+  ],
+  "vercelProjectId": "prj_5UcOn2pEUMBXmpzBWaL5FPyIeA1s",
+  "deployedWithUserToken": false
+}
